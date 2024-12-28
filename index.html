@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display WebCam Stream</title>
+
+    <style>
+        h1{
+            font-family: sans-serif;
+            color: #585656;
+            text-align: center;
+        }
+
+        body{
+            margin: 50px;
+        }
+
+        #container{
+            margin: 0px auto;
+            width: 500px;
+            height: 375px;
+            border: 10px #15163f solid;
+        }
+
+        #videoElement{
+            width: 500px;
+            height: 375px;
+            background-color: #4e4848;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display WebCam Stream</h1>
+    <div id="container">
+        <video autoplay="true" id="videoElement">
+            
+        </video>
+    </div>    
+</body>
+
+<script>
+    let video = document.querySelector("#videoElement");
+    
+    if(navigator.mediaDevices.getUserMedia){
+        navigator.mediaDevices.getUserMedia({video: true})
+            .then(function(stream){
+                video.srcObject = stream;
+            })
+            .catch(function(error){
+                console.log("Something went wrong");
+            })
+    }
+    else{
+        console.log("getUserMedia not supported!");
+    }
+
+</script>
+
+</html>
